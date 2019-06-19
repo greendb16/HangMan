@@ -24,35 +24,43 @@ public class HangMan {
             for (int i = 0; i < activeWord.length(); i++) {
                 field[i] = ("_");
             }
+
+            //turn word into collection of characters
             char[] test = activeWord.toCharArray();
 
 
             //Game Text
-            System.out.println("Lets play Hangman!\n");
+            System.out.println("\nLets play Hangman!\n");
             System.out.println("Here is the word im thinking of:\t");
             for (int i = 0; i < activeWord.length(); i++) {
                 System.out.print(field[i] + "\t");
             }
 
-            //Guess
+            //Guess Prompt
             System.out.println("\n\nGuess a letter:");
-            String answer = key.nextLine();
-            char input = answer.charAt(0);
+
+            //Guess Counter
             int chance = 6;
 
 
             //Test
             while (Arrays.asList(field).contains("_") && chance > 0) {
+
+                //input
+                String answer = key.nextLine();
+                char input = answer.charAt(0);
+
                 //Word Guess Test
-                if(answer.equalsIgnoreCase(activeWord)){
-                    for(int i=0; i< activeWord.length(); i++){
+                if (answer.equalsIgnoreCase(activeWord)) {
+                    for (int i = 0; i < activeWord.length(); i++) {
                         String word = String.valueOf(test[i]);
                         field[i] = word;
-                        if(i== (activeWord.length()-1)){
+                        if (i == (activeWord.length() - 1)) {
                             break;
                         }
                     }
                 }
+
                 //Letter Guess Test
                 int fail = 0;
                 for (int i = 0, p = 0; i < test.length; i++) {
@@ -66,12 +74,14 @@ public class HangMan {
                     }
 
                 }
+
+                //Guess Results
                 if (fail > 0) {
                     chance--;
 
                     //Endgame
                     if (chance == 0) {
-                        System.out.println("Sorry, you ran out of guesses and lost! :(\nThe word was:\t" + activeWord);
+                        System.out.println("\nSorry, you ran out of guesses and lost! :(\nThe word was:\t" + activeWord);
                         break;
                     }
 
@@ -81,12 +91,8 @@ public class HangMan {
                     for (int i = 0; i < activeWord.length(); i++) {
                         System.out.print(field[i] + "\t");
                     }
-                    if (chance > 0) {
-                        System.out.println("\nGuess a letter:");
-                         answer = key.nextLine();
-                         input = answer.charAt(0);
-                    }
 
+                    System.out.println("\nGuess a letter:");
 
                     //Win condition
                 } else if (!Arrays.asList(field).contains("_")) {
@@ -94,7 +100,7 @@ public class HangMan {
                     break;
 
 
-                    //correct guess
+                    //Correct guess
                 } else {
                     System.out.println("\nGood Guess!");
 
@@ -102,15 +108,11 @@ public class HangMan {
                         System.out.print(field[i] + "\t");
                     }
                     System.out.println("\nGuess Again:");
-                     answer = key.nextLine();
-                     input = answer.charAt(0);
-
-
                 }
             }
+
             //Replay
             System.out.println("\n\nWould you like to play again? (Yes/No)");
-            //key.nextLine();
             reDo = key.nextLine();
         } while (reDo.equalsIgnoreCase("yes"));
         System.out.println("Goodbye");
