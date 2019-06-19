@@ -38,13 +38,22 @@ public class HangMan {
 
             //Guess
             System.out.println("\n\nGuess a letter:");
-            char input = key.next().charAt(0);
+            String answer = key.nextLine();
+            char input = answer.charAt(0);
             int chance = 6;
 
 
             //Test
             while (Arrays.asList(field).contains("_") && chance > 0) {
-
+                if(answer.equalsIgnoreCase(activeWord)){
+                    for(int i=0; i< activeWord.length(); i++){
+                        String word = String.valueOf(test[i]);
+                        field[i] = word;
+                        if(i== (activeWord.length()-1)){
+                            break;
+                        }
+                    }
+                }
                 int fail = 0;
                 for (int i = 0, p = 0; i < test.length; i++) {
                     if (test[i] == input) {
@@ -74,7 +83,8 @@ public class HangMan {
                     }
                     if (chance > 0) {
                         System.out.println("\nGuess a letter:");
-                        input = key.next().charAt(0);
+                         answer = key.nextLine();
+                         input = answer.charAt(0);
                     }
 
 
@@ -92,14 +102,15 @@ public class HangMan {
                         System.out.print(field[i] + "\t");
                     }
                     System.out.println("\nGuess Again:");
-                    input = key.next().charAt(0);
+                     answer = key.nextLine();
+                     input = answer.charAt(0);
 
 
                 }
             }
             //Replay
             System.out.println("\n\nWould you like to play again? (Yes/No)");
-            key.nextLine();
+            //key.nextLine();
             reDo = key.nextLine();
         } while (reDo.equalsIgnoreCase("yes"));
         System.out.println("Goodbye");
