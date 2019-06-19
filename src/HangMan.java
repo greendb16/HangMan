@@ -13,7 +13,6 @@ public class HangMan {
 
 
         do {
-
             //Select Random Word
             Random ranGen = new Random();
             int ran = ranGen.nextInt(10);
@@ -29,7 +28,6 @@ public class HangMan {
 
 
             //Game Text
-            System.out.println(activeWord);
             System.out.println("Lets play Hangman!\n");
             System.out.println("Here is the word im thinking of:\t");
             for (int i = 0; i < activeWord.length(); i++) {
@@ -45,6 +43,7 @@ public class HangMan {
 
             //Test
             while (Arrays.asList(field).contains("_") && chance > 0) {
+                //Word Guess Test
                 if(answer.equalsIgnoreCase(activeWord)){
                     for(int i=0; i< activeWord.length(); i++){
                         String word = String.valueOf(test[i]);
@@ -54,6 +53,7 @@ public class HangMan {
                         }
                     }
                 }
+                //Letter Guess Test
                 int fail = 0;
                 for (int i = 0, p = 0; i < test.length; i++) {
                     if (test[i] == input) {
@@ -67,8 +67,8 @@ public class HangMan {
 
                 }
                 if (fail > 0) {
-
                     chance--;
+
                     //Endgame
                     if (chance == 0) {
                         System.out.println("Sorry, you ran out of guesses and lost! :(\nThe word was:\t" + activeWord);
